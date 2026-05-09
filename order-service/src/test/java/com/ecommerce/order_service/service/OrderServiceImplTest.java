@@ -41,7 +41,7 @@ class OrderServiceImplTest {
                 .thenReturn(Optional.empty());
 
         Order savedOrder = Order.builder()
-                .Id(1L)
+                .id(1L)
                 .userId(1L)
                 .productId(100L)
                 .quantity(2)
@@ -70,7 +70,7 @@ class OrderServiceImplTest {
         request.setIdempotencyKey("abc123");
 
         Order existingOrder = Order.builder()
-                .Id(1L)
+                .id(1L)
                 .userId(1L)
                 .productId(100L)
                 .quantity(2)
@@ -92,7 +92,7 @@ class OrderServiceImplTest {
     @Test
     void shouldGetOrderSuccessfully() {
         Order existingOrder = Order.builder()
-                .Id(1L)
+                .id(1L)
                 .userId(1L)
                 .productId(100L)
                 .quantity(2)
