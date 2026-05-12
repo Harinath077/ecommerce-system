@@ -18,6 +18,16 @@
 
 ---
 
+### 2. 🛡️ Inventory Service — Exception Layer
+
+| Task | File | Detail |
+|---|---|---|
+| Created `GlobalExceptionHandler` | `exception/GlobalExceptionHandler.java` | Centralized `@RestControllerAdvice` for API error responses |
+| Created `InsufficientStockException` | `exception/InsufficientStockException.java` | Custom exception for stock validation |
+| Created `ProductNotFoundException` | `exception/ProductNotFoundException.java` | Custom exception for missing products |
+
+---
+
 ### 2. 📁 Updated Project Structure
 
 ```
@@ -38,11 +48,14 @@ ecommerce-system/
 │           ├── service/OrderService.java
 │           └── service/OrderServiceImpl.java
 │
-├── inventory-service/              🔄 Entity & Repo done — Service & Controller pending
+├── inventory-service/              🔄 Entity, Repo, Exception done — Service & Controller pending
 │   └── src/main/java/
 │       └── com/ecommerce/inventory_service/
 │           ├── InventoryServiceApplication.java
 │           ├── entity/Inventory.java             ✅ NEW
+│           ├── exception/GlobalExceptionHandler.java     ✅ NEW
+│           ├── exception/InsufficientStockException.java ✅ NEW
+│           ├── exception/ProductNotFoundException.java   ✅ NEW
 │           └── repository/InventoryRepository.java ✅ NEW
 │
 ├── docs/
@@ -79,7 +92,6 @@ c277818      Day 2: Added inventory service foundation
 | Create `service/InventoryServiceImpl.java` | inventory-service |
 | Create `dto/InventoryRequest.java` & `InventoryResponse.java` | inventory-service |
 | Create `controller/InventoryController.java` | inventory-service |
-| Create `exception/` classes (InventoryNotFoundException, etc.) | inventory-service |
 | Write unit tests for InventoryServiceImpl | inventory-service |
 | Add `@PrePersist` / `@PreUpdate` lifecycle hooks in `Inventory.java` | inventory-service |
 
