@@ -91,6 +91,7 @@ public class InventoryServiceImp implements InventoryService{
     private InventoryResponse mapToResponse(Inventory inventory){
 
         return InventoryResponse.builder()
+                .inventoryId(inventory.getId())
                 .productId(inventory.getProductId())
                 .availableQuantity(inventory.getAvailableQuantity())
                 .reservedQuantity(inventory.getReservedQuantity())
