@@ -23,3 +23,6 @@ management:
     web:
       exposure:
         include: health
+inventory:
+  service:
+    url: ${INVENTORY_SERVICE_URL:http://localhost:8082}
