@@ -9,7 +9,11 @@ import com.ecommerce.order_service.exception.OrderNotFoundException;
 import com.ecommerce.order_service.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import com.ecommerce.order_service.client.InventoryClient;
+import com.ecommerce.order_service.dto.ReserveStockRequest;
+import com.ecommerce.order_service.exception.InventoryReservationException;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +22,8 @@ public class OrderServiceImpl implements OrderService {
 
     // Injection
     private final OrderRepository orderRepository;
+    private final InventoryClient inventoryClient;
+
 
     @Override
     public OrderResponse createOrder(CreateOrderRequest request) {
@@ -28,6 +34,23 @@ public class OrderServiceImpl implements OrderService {
                     log.warn("Duplicate order request detected");
                     throw new DuplicateOrderException("Duplicate order request");
                 });
+
+        ReserveStockRequest reserveStockRequest =
+                new ReserveStockRequest(
+                        request.getProductId(),
+                        request.getQuantity(),
+                        request.getIdempotencyKey()
+                );
+        try{
+            inventoryClient.reserveStock(reserveStockRequest);
+        }catch( Exception ex ){
+            log.error("Inventory reservation failed",ex);
+
+            throw new InventoryReservationException(
+                    "unable to reserve inventory",
+                    HttpStatus.BAD_REQUEST
+            );
+        }
 
         Order order = Order.builder()
                 .userId(request.getUserId())

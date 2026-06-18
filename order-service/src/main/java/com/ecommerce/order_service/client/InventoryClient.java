@@ -1,7 +1,6 @@
 package com.ecommerce.order_service.client;
 
-import com.ecommerce.order_service.dto.InventoryResponse;
-import com.ecommerce.order_service.dto.ReserveInventoryRequest;
+import com.ecommerce.order_service.dto.ReserveStockRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,5 +10,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface InventoryClient {
 
     @PostMapping("/inventory/reserve")
-    ResponseEntity<InventoryResponse> reserveStock(@RequestBody ReserveInventoryRequest request);
+    ResponseEntity<Void> reserveStock(@RequestBody ReserveStockRequest request);
 }

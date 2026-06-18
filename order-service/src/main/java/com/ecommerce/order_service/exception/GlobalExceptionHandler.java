@@ -31,6 +31,14 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(InventoryReservationException.class)
+    public ResponseEntity<Map<String, String>> handleInventoryReservationException(
+            InventoryReservationException ex){
+        Map<String, String> error = new HashMap<>();
+        error.put("message", ex.getMessage());
+        return new ResponseEntity<>(error, ex.getStatus());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationError(
             MethodArgumentNotValidException ex){
@@ -57,12 +65,5 @@ public class GlobalExceptionHandler {
                 HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String,String>> handleInventoryReservationException(
-            InventoryReservationException ex){
-        return ResponseEntity.badRequest().body(
-                Map.of("message",ex.getMessage())
-        );
-    }
 
 }

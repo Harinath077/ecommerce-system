@@ -13,4 +13,7 @@ public class ReserveInventoryRequest {
     @NotNull
     @Min(1)
     private Integer quantity;
+
+    @NotNull
+    private String idempotencyKey;
 }
