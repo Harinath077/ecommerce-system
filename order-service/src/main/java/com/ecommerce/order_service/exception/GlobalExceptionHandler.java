@@ -56,4 +56,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error,
                 HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String,String>> handleInventoryReservationException(
+            InventoryReservationException ex){
+        return ResponseEntity.badRequest().body(
+                Map.of("message",ex.getMessage())
+        );
+    }
+
 }
