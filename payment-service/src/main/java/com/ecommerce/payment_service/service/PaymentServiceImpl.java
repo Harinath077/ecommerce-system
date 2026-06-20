@@ -36,7 +36,7 @@ public class PaymentServiceImpl implements PaymentService {
                     Payment payment = Payment.builder()
                             .orderId(request.getOrderId())
                             .amount(request.getAmount())
-                            .status(PaymentStatus.SUCCESS)
+                            .status(PaymentStatus.COMPLETED)
                             .idempotencyKey(request.getIdempotencyKey())
                             .build();
 
